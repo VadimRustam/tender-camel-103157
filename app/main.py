@@ -7,8 +7,10 @@ def handle_connection(conn: socket.socket):
         BUFFER_SIZE = 2048
         chunk = conn.recv(BUFFER_SIZE)
         msg = chunk.decode("utf-8")
-        if chunk != b"":
-            conn.sendall(b"+PONG\r\n")
+        if not chunk: # cus if chunk == b"", you won't exit the whie loop 
+            break
+        
+        conn.sendall(b"+PONG\r\n")
 
 
 def main():
